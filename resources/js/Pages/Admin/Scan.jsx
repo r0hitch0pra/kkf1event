@@ -99,6 +99,21 @@ function UserCard({ result, onReset }) {
         );
     }
 
+    useEffect(() => {
+        const channel = window.Echo.private('staff');
+        channel.listen('.AmenityStatusChanged', (e) => {
+            if (e.userId !== result.user.id) return;
+            setSignups((prev) =>
+                prev.map((s) =>
+                    s.amenity_id === e.amenityId
+                        ? { ...s, status: e.status, assignment: e.assignment }
+                        : s
+                )
+            );
+        });
+        return () => window.Echo.leave('staff');
+    }, [result.user.id]);
+
     return (
         <div className="mt-6">
             <div className="rounded-2xl border border-gray-700 bg-gray-900 p-5">
