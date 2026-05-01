@@ -12,7 +12,13 @@ export default function Checkin() {
     const [revealed, setRevealed] = useState(false);
 
     useEffect(() => {
-        const t = setTimeout(() => setRevealed(true), 120);
+        const audio = new Audio('/intro.mp3');
+        audio.volume = 0.6;
+        audio.load();
+        const t = setTimeout(() => {
+            setRevealed(true);
+            audio.play().catch(() => {});
+        }, 120);
         return () => clearTimeout(t);
     }, []);
 
