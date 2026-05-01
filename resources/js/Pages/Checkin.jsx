@@ -19,6 +19,12 @@ export default function Checkin() {
     return (
         <div className="relative flex min-h-screen flex-col overflow-hidden bg-black text-white">
             <Head title="Check In" />
+            <style>{`
+                @keyframes breathe {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-7px); }
+                }
+            `}</style>
             <div
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-amber-950/40 via-transparent to-transparent"/>
 
@@ -35,7 +41,10 @@ export default function Checkin() {
                         src="/logo.svg"
                         alt="Komic Karma"
                         className="mx-auto w-full max-w-xs"
-                        style={{ filter: 'brightness(0) invert(1)' }}
+                        style={{
+                            filter: 'brightness(0) invert(1)',
+                            animation: revealed ? 'breathe 3s ease-in-out 2s infinite' : 'none',
+                        }}
                     />
                     <p
                         className="mt-2 text-xs font-semibold uppercase text-center tracking-[0.25em] text-amber-400"
