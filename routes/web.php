@@ -15,6 +15,8 @@ use App\Http\Middleware\IsSuperAdmin;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::redirect('/', '/checkin');
+
 // Patron auth
 Route::post('/phone-lookup', [SignupController::class, 'lookup'])->name('phone.lookup');
 
