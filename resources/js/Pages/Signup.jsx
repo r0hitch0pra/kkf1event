@@ -72,10 +72,19 @@ export default function Signup({ staffCheckin = false }) {
 
                 <div className="mb-8 flex items-start justify-between">
                     <div>
-                        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-400">
-                            {staffCheckin ? 'Staff · Check In' : 'Komic Karma'}
-                        </p>
-                        <h1 className="mt-1 text-3xl font-black tracking-tight">
+                        {staffCheckin ? (
+                            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-amber-400">
+                                Staff · Check In
+                            </p>
+                        ) : (
+                            <img
+                                src="/logo.svg"
+                                alt="Komic Karma"
+                                className="mb-1 w-32 opacity-60"
+                                style={{ filter: 'brightness(0) invert(1)' }}
+                            />
+                        )}
+                        <h1 className="mt-2 text-4xl font-black tracking-tight">
                             {isExists
                                 ? (staffCheckin ? 'Found them!' : 'Welcome back!')
                                 : (staffCheckin ? 'New Patron' : 'Join the party')}

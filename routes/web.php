@@ -49,6 +49,7 @@ Route::middleware(IsStaff::class)->prefix('admin')->name('admin.')->group(functi
     Route::post('/checkin', [AdminCheckinController::class, 'store'])->name('checkin.store');
     Route::post('/lookup', [AdminController::class, 'lookup'])->name('lookup');
     Route::post('/assign', [AdminActionController::class, 'assign'])->name('assign');
+    Route::post('/reset-signups', [AdminActionController::class, 'resetSignups'])->name('reset-signups');
     Route::post('/activate', [AdminActionController::class, 'activate'])->name('activate');
     Route::post('/complete', [AdminActionController::class, 'complete'])->name('complete');
 

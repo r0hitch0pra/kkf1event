@@ -92,6 +92,21 @@ function AmenityRow({ signup, userId, onUpdate }) {
 
 function UserCard({ result, onReset }) {
     const [signups, setSignups] = useState(result.signups);
+    const [resetting, setResetting] = useState(false);
+
+    async function handleResetSignups() {
+        setResetting(true);
+        const res = await fetch('/admin/reset-signups', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content ?? '',
+            },
+            body: JSON.stringify({ user_id: result.user.id }),
+        });
+        setResetting(false);
+        if (res.ok) setSignups([]);
+    }
 
     function handleUpdate(updated) {
         setSignups((prev) =>
@@ -103,13 +118,24 @@ function UserCard({ result, onReset }) {
         const channel = window.Echo.private('staff');
         channel.listen('.AmenityStatusChanged', (e) => {
             if (e.userId !== result.user.id) return;
-            setSignups((prev) =>
-                prev.map((s) =>
-                    s.amenity_id === e.amenityId
-                        ? { ...s, status: e.status, assignment: e.assignment }
-                        : s
-                )
-            );
+            setSignups((prev) => {
+                const exists = prev.some((s) => s.amenity_id === e.amenityId);
+                if (exists) {
+                    return prev.map((s) =>
+                        s.amenity_id === e.amenityId
+                            ? { ...s, status: e.status, assignment: e.assignment }
+                            : s
+                    );
+                }
+                return [...prev, {
+                    amenity_id:          e.amenityId,
+                    amenity_name:        e.amenityName,
+                    amenity_slug:        e.slug,
+                    requires_assignment: e.requiresAssignment,
+                    status:              e.status,
+                    assignment:          e.assignment,
+                }];
+            });
         });
         return () => window.Echo.leave('staff');
     }, [result.user.id]);
@@ -138,8 +164,16 @@ function UserCard({ result, onReset }) {
             </div>
 
             <button
+                onClick={handleResetSignups}
+                disabled={resetting || signups.length === 0}
+                className="mt-4 w-full rounded-lg border border-red-900/50 py-3 text-sm font-semibold text-red-500 disabled:opacity-30 active:bg-red-950/40"
+            >
+                Reset All Requests
+            </button>
+
+            <button
                 onClick={onReset}
-                className="mt-4 w-full rounded-lg border border-gray-700 py-3 text-sm text-gray-300"
+                className="mt-2 w-full rounded-lg border border-gray-700 py-3 text-sm text-gray-300"
             >
                 Scan another
             </button>

@@ -107,7 +107,7 @@ function AmenityAction({ signup, userId, onUpdate }) {
     );
 }
 
-function UserCard({ user, signups, onSignupUpdate, selected, onToggle }) {
+function UserCard({ user, signups, onSignupUpdate, onSignupsReset, selected, onToggle }) {
     const activeSignups = Object.values(signups);
 
     return (
@@ -162,6 +162,12 @@ function UserCard({ user, signups, onSignupUpdate, selected, onToggle }) {
                                     onUpdate={onSignupUpdate}
                                 />
                             ))}
+                            <button
+                                onClick={onSignupsReset}
+                                className="mt-1 w-full rounded-xl border border-red-900/50 py-2.5 text-sm font-semibold text-red-500 active:bg-red-950/40"
+                            >
+                                Reset All Requests
+                            </button>
                         </div>
                     )}
                 </div>
@@ -213,6 +219,22 @@ export default function Users({ users: initialUsers }) {
 
         return () => window.Echo.leave('staff');
     }, []);
+
+    async function handleSignupsReset(userId) {
+        const res = await fetch('/admin/reset-signups', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content ?? '',
+            },
+            body: JSON.stringify({ user_id: userId }),
+        });
+        if (res.ok) {
+            setUsers((prev) =>
+                prev.map((u) => u.id === userId ? { ...u, signups: {} } : u)
+            );
+        }
+    }
 
     function handleSignupUpdate(userId, slug, updated) {
         setUsers((prev) =>
@@ -274,6 +296,7 @@ export default function Users({ users: initialUsers }) {
                                 user={user}
                                 signups={user.signups}
                                 onSignupUpdate={(slug, updated) => handleSignupUpdate(user.id, slug, updated)}
+                                onSignupsReset={() => handleSignupsReset(user.id)}
                                 selected={selectedId === user.id}
                                 onToggle={() => setSelectedId((prev) => (prev === user.id ? null : user.id))}
                             />

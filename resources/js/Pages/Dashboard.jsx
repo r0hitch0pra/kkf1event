@@ -157,6 +157,10 @@ export default function Dashboard({ amenities: initialAmenities, friends: initia
             setFriends((prev) => prev.filter((f) => f.id !== e.removedUserId));
         });
 
+        channel.listen('.SignupsReset', () => {
+            setAmenities((prev) => prev.map((a) => ({ ...a, status: null, assignment: null })));
+        });
+
         return () => { window.Echo.leave(`user.${user.id}`); };
     }, [user.id]);
 
@@ -167,9 +171,17 @@ export default function Dashboard({ amenities: initialAmenities, friends: initia
 
             <div className="relative mx-auto max-w-sm px-4 py-10">
 
-                <p className="mb-6 text-center text-xs font-semibold uppercase tracking-[0.25em] text-amber-400">
-                    Cars, Cues &amp; Comedy
-                </p>
+                <div className="mb-6 flex flex-col items-center gap-2">
+                    <img
+                        src="/logo.svg"
+                        alt="Komic Karma"
+                        className="w-36"
+                        style={{ filter: 'brightness(0) invert(1)' }}
+                    />
+                    <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-amber-400">
+                        Cars, Cues &amp; Comedy
+                    </p>
+                </div>
 
                 {/* QR card */}
                 <div className="flex flex-col items-center">

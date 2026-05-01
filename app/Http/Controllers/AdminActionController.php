@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\AmenityStatusChanged;
 use App\Events\FriendStatusChanged;
+use App\Events\SignupsReset;
 use App\Models\AmenitySignup;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -70,6 +71,17 @@ class AdminActionController extends Controller
         $this->broadcastChange($signup);
 
         return response()->json($this->signupPayload($signup));
+    }
+
+    public function resetSignups(Request $request): JsonResponse
+    {
+        $request->validate(['user_id' => 'required|exists:users,id']);
+
+        AmenitySignup::where('user_id', $request->user_id)->delete();
+
+        broadcast(new SignupsReset($request->user_id));
+
+        return response()->json(['ok' => true]);
     }
 
     private function broadcastChange(AmenitySignup $signup): void

@@ -28,17 +28,20 @@ export default function Checkin() {
                 <div
                     style={{
                         transform: revealed ? 'translateY(0)' : 'translateY(38vh)',
-                        transition: 'transform 1.75s cubic-bezier(0.22, 1, 0.36, 1)',
+                        transition: 'transform 2s cubic-bezier(0.22, 1, 0.36, 1)',
                     }}
                 >
-                    <h1 className="text-5xl font-black leading-none tracking-tight text-center text-white">
-                        Komic Karma
-                    </h1>
+                    <img
+                        src="/logo.svg"
+                        alt="Komic Karma"
+                        className="mx-auto w-full max-w-xs"
+                        style={{ filter: 'brightness(0) invert(1)' }}
+                    />
                     <p
                         className="mt-2 text-xs font-semibold uppercase text-center tracking-[0.25em] text-amber-400"
                         style={{
                             opacity: revealed ? 1 : 0,
-                            transition: 'opacity 0.4s ease 0.55s',
+                            transition: 'opacity 0.5s ease 1.6s',
                         }}
                     >
                         Cars, Cues &amp; Comedy
@@ -46,7 +49,7 @@ export default function Checkin() {
                     <p className="mb-8 mt-0 text-sm text-zinc-500 text-center"
                        style={{
                            opacity: revealed ? 1 : 0,
-                           transition: 'opacity 0.4s ease 0.55s',
+                           transition: 'opacity 0.5s ease 1.6s',
                        }}>
                         Scan in at the door · Get your wristband
                     </p>
@@ -57,7 +60,7 @@ export default function Checkin() {
                     style={{
                         opacity: revealed ? 1 : 0,
                         transform: revealed ? 'translateY(0)' : 'translateY(24px)',
-                        transition: 'opacity 0.5s ease 0.7s, transform 0.5s ease 0.7s',
+                        transition: 'opacity 0.5s ease 1.8s, transform 0.5s ease 1.8s',
                     }}
                 >
                     <div className="grid grid-cols-2 gap-3">
