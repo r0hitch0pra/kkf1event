@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use BaconQrCode\Renderer\Image\SvgImageBackEnd;
+use BaconQrCode\Renderer\ImageRenderer;
+use BaconQrCode\Renderer\RendererStyle\RendererStyle;
+use BaconQrCode\Writer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response as HtmlResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -44,6 +49,24 @@ class AdminController extends Controller
             ]);
 
         return Inertia::render('Admin/Users', ['users' => $users]);
+    }
+
+    public function doorQr(): HtmlResponse
+    {
+        $url = config('app.url').'/checkin';
+
+        $renderer = new ImageRenderer(
+            new RendererStyle(600),
+            new SvgImageBackEnd
+        );
+
+        $qrSvg = (new Writer($renderer))->writeString($url);
+
+        return response()->make(
+            view('door-qr', ['qrSvg' => $qrSvg, 'url' => $url])->render(),
+            200,
+            ['Content-Type' => 'text/html']
+        );
     }
 
     public function lookup(Request $request): JsonResponse

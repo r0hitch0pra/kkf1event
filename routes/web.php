@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Admin auth (public)
+Route::get('/admin/door-qr', [AdminController::class, 'doorQr'])->name('admin.door-qr');
 Route::get('/admin/login', [AdminAuthController::class, 'show'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'store'])->name('admin.login.store');
 Route::post('/admin/logout', [AdminAuthController::class, 'destroy'])->name('admin.logout')->middleware('auth');
