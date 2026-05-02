@@ -19,8 +19,32 @@
         .card {
             text-align: center;
             padding: 48px 56px;
-            max-width: 520px;
+            max-width: 560px;
             width: 100%;
+        }
+
+        .ferrari {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            object-position: center 60%;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .f1-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #dc2626;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 999px;
+            margin-bottom: 28px;
         }
 
         .logo {
@@ -83,6 +107,12 @@
 </head>
 <body>
     <div class="card">
+        <img
+            src="/f1-party.jpg"
+            alt="F1 Watch Party"
+            class="ferrari"
+        >
+        <div class="f1-badge">🏁 F1 Watch Party Tonight</div>
         <img src="/logo.svg" alt="Komic Karma" class="logo">
         <p class="tagline">Cars, Cues &amp; Comedy</p>
 
