@@ -14,6 +14,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
         }
 
         .card {
@@ -97,11 +99,7 @@
         }
 
         @media print {
-            body { background: #fff; color: #000; }
-            .logo { filter: none; }
-            .tagline { color: #b45309; }
-            .sub { color: #52525b; }
-            .url { color: #a1a1aa; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     </style>
 </head>
