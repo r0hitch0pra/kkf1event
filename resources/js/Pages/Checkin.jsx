@@ -2,10 +2,10 @@ import {useState, useEffect} from 'react';
 import {Head, Link} from '@inertiajs/react';
 
 const ACTIVITIES = [
-    {icon: '🏎️', label: 'Exotic Cars'},
-    {icon: '🎱', label: 'Pool Tables'},
-    {icon: '🎤', label: 'Comedy Show'},
-    {icon: '🏁', label: 'F1 Watch Party'},
+    {icon: '🏎️', label: 'Exotic Cars',    sub: "Tonight's showcase",   dot: 'bg-amber-500'},
+    {icon: '🎱', label: 'Pool Tables',    sub: 'Open all night',         dot: 'bg-zinc-500'},
+    {icon: '🎤', label: 'Comedy Show',    sub: 'Live on stage',           dot: 'bg-purple-500'},
+    {icon: '🏁', label: 'F1 Watch Party', sub: 'Race starts tonight',     dot: 'bg-red-500'},
 ];
 
 export default function Checkin() {
@@ -28,7 +28,7 @@ export default function Checkin() {
             <div
                 className="pointer-events-none absolute inset-0 bg-gradient-to-b from-amber-950/40 via-transparent to-transparent"/>
 
-            <div className="relative flex flex-1 flex-col px-6 py-16">
+            <div className="relative flex flex-1 flex-col px-6 py-10">
 
                 {/* Logo — starts centered on screen, slides up to top */}
                 <div
@@ -40,7 +40,7 @@ export default function Checkin() {
                     <img
                         src="/logo.svg"
                         alt="Komic Karma"
-                        className="mx-auto w-full max-w-xs"
+                        className="mx-auto w-full max-w-[200px]"
                         style={{
                             filter: 'brightness(0) invert(1)',
                             animation: revealed ? 'breathe 3s ease-in-out 2s infinite' : 'none',
@@ -55,7 +55,7 @@ export default function Checkin() {
                     >
                         Cars, Cues &amp; Comedy
                     </p>
-                    <p className="mb-8 mt-0 text-sm text-zinc-500 text-center"
+                    <p className="mb-5 mt-0 text-sm text-zinc-500 text-center"
                        style={{
                            opacity: revealed ? 1 : 0,
                            transition: 'opacity 0.5s ease 1.6s',
@@ -72,19 +72,20 @@ export default function Checkin() {
                         transition: 'opacity 0.5s ease 1.8s, transform 0.5s ease 1.8s',
                     }}
                 >
-                    <div className="grid grid-cols-2 gap-3">
-                        {ACTIVITIES.map(({icon, label}) => (
-                            <div
-                                key={label}
-                                className="flex items-center gap-3 rounded-2xl border border-zinc-800 bg-zinc-900/60 px-4 py-3"
-                            >
-                                <span className="text-2xl">{icon}</span>
-                                <span className="text-sm font-medium text-zinc-300">{label}</span>
+                    <div className="divide-y divide-zinc-900/80">
+                        {ACTIVITIES.map(({icon, label, sub, dot}) => (
+                            <div key={label} className="flex items-center gap-4 py-3.5">
+                                <span className="w-10 text-center text-3xl leading-none shrink-0">{icon}</span>
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-bold text-white">{label}</p>
+                                    <p className="text-xs text-zinc-500">{sub}</p>
+                                </div>
+                                <span className={`h-2 w-2 rounded-full shrink-0 ${dot} opacity-70`} />
                             </div>
                         ))}
                     </div>
 
-                    <div className="mt-10">
+                    <div className="mt-6">
                         <Link
                             href="/signup"
                             className="block w-full rounded-2xl bg-amber-400 py-4 text-center text-base font-bold text-black shadow-lg shadow-amber-900/30 transition-transform active:scale-95"
