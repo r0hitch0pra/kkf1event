@@ -46,7 +46,7 @@ export default function EventTimeline({ amenities }) {
     );
 
     return (
-        <div className="mt-8">
+        <div>
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-600">
                 Today's Schedule
             </p>

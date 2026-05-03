@@ -183,21 +183,27 @@ export default function Dashboard({ amenities: initialAmenities, friends: initia
                     </p>
                 </div>
 
-                {/* QR card */}
-                <div className="flex flex-col items-center">
-                    <div className="overflow-hidden rounded-3xl bg-white p-3 shadow-2xl shadow-amber-900/20">
-                        <div
-                            dangerouslySetInnerHTML={{ __html: qrSvg }}
-                            className="[&>svg]:block [&>svg]:h-full [&>svg]:w-full"
-                            style={{ width: 228, height: 228 }}
-                        />
+                {/* QR + Timeline side by side */}
+                <div className="flex items-start gap-4">
+                    {/* QR card */}
+                    <div className="flex flex-col items-center shrink-0">
+                        <div className="overflow-hidden rounded-2xl bg-white p-2 shadow-2xl shadow-amber-900/20">
+                            <div
+                                dangerouslySetInnerHTML={{ __html: qrSvg }}
+                                className="[&>svg]:block [&>svg]:h-full [&>svg]:w-full"
+                                style={{ width: 148, height: 148 }}
+                            />
+                        </div>
+                        <p className="mt-2 text-base font-black tracking-tight">{user.name}</p>
+                        <p className="mt-0.5 text-xs text-zinc-500">Party of {user.party_size}</p>
+                        <p className="text-xs text-zinc-600">Show to staff</p>
                     </div>
-                    <p className="mt-4 text-xl font-black tracking-tight">{user.name}</p>
-                    <p className="mt-0.5 text-sm text-zinc-500">Party of {user.party_size} · Show this to staff</p>
-                </div>
 
-                {/* Tonight's schedule */}
-                <EventTimeline amenities={amenities} />
+                    {/* Timeline */}
+                    <div className="flex-1 min-w-0">
+                        <EventTimeline amenities={amenities} />
+                    </div>
+                </div>
 
                 {/* Activities */}
                 <div className="mt-10">
