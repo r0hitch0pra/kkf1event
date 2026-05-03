@@ -110,7 +110,7 @@
             alt="F1 Watch Party"
             class="ferrari"
         >
-        <div class="f1-badge">🏁 F1 Watch Party Tonight</div>
+        <div class="f1-badge">🏁 F1 Watch Party Today</div>
         <img src="/logo.svg" alt="Komic Karma" class="logo">
         <p class="tagline">Cars, Cues &amp; Comedy</p>
 
@@ -119,7 +119,7 @@
         </div>
 
         <p class="cta">Scan to check in</p>
-        <p class="sub">Get your wristband · Access tonight's activities</p>
+        <p class="sub">Scan in · Unlock today's activities</p>
         <p class="url">{{ $url }}</p>
     </div>
 </body>

@@ -94,7 +94,7 @@ export default function Signup({ staffCheckin = false }) {
                                 ? "Account found. Tap below to check in."
                                 : isNew
                                     ? 'Just a couple more details.'
-                                    : 'Enter their phone number.'}
+                                    : (staffCheckin ? 'Enter their phone number.' : 'Enter your phone number.')}
                         </p>
                     </div>
                     {staffCheckin && (

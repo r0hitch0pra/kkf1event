@@ -5,7 +5,7 @@ const ACTIVITIES = [
     {icon: '🏎️', label: 'Exotic Cars',    sub: "Tonight's showcase",   dot: 'bg-amber-500'},
     {icon: '🎱', label: 'Pool Tables',    sub: 'Open all night',         dot: 'bg-zinc-500'},
     {icon: '🎤', label: 'Comedy Show',    sub: 'Live on stage',           dot: 'bg-purple-500'},
-    {icon: '🏁', label: 'F1 Watch Party', sub: 'Race starts tonight',     dot: 'bg-red-500'},
+    {icon: '🏁', label: 'F1 Watch Party', sub: 'Race starts today',     dot: 'bg-red-500'},
 ];
 
 export default function Checkin() {
@@ -60,7 +60,7 @@ export default function Checkin() {
                            opacity: revealed ? 1 : 0,
                            transition: 'opacity 0.5s ease 1.6s',
                        }}>
-                        Scan in at the door · Get your wristband
+                        Check in now · Unlock your day
                     </p>
                 </div>
 
